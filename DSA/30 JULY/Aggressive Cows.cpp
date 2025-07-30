@@ -25,8 +25,25 @@ bool CountCows(vector<int> stalls, int dist, int k){
         }
         return limit;
     }
+    int BSaggressiveCows(vector<int> &nums, int k){
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        int low=1;
+        int high=nums[n-1]-nums[0];
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(CountCows(nums,mid,k)==true){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return high;
+    }
 int main(){
-    vector<int> stalls={0,3,4,7,10,9};
-    cout<<aggressiveCows(stalls,4);
+    vector<int> stalls={4,2,1,3,6};
+    cout<<aggressiveCows(stalls,2);
+    cout<<BSaggressiveCows(stalls,2);
 
 }
